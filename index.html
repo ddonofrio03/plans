@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Retirement Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --ink: #1a1d24;
+  --ink-soft: #3a3f4a;
+  --paper: #faf8f3;
+  --paper-warm: #f2ede2;
+  --rule: #d9d3c4;
+  --accent: #8b6f3f;
+  --accent-deep: #5c4624;
+  --navy: #1e3a5f;
+  --sage: #6b7f5f;
+  --terracotta: #a8623d;
+  --success: #4a7a4a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+}
+
+/* Hero */
+.hero {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 48px;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--ink-soft);
+  max-width: 620px;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.hero-meta div strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Sections */
+section {
+  margin-bottom: 64px;
+}
+
+h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.section-lede {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 17px;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--ink);
+  margin-top: 32px;
+  margin-bottom: 14px;
+}
+
+p {
+  margin-bottom: 16px;
+  max-width: 720px;
+}
+
+strong { font-weight: 600; color: var(--ink); }
+
+ul { margin: 0 0 20px 20px; }
+li { margin-bottom: 8px; max-width: 700px; }
+
+/* Callout boxes */
+.callout {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--accent);
+  padding: 24px 28px;
+  margin: 28px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.callout-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--accent-deep);
+}
+
+.callout p:last-child { margin-bottom: 0; }
+
+/* Snapshot grid at top */
+.snapshot {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: 36px 0;
+}
+
+.snap-cell {
+  padding: 24px 20px;
+  border-right: 1px solid var(--rule);
+}
+.snap-cell:last-child { border-right: none; }
+
+.snap-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.snap-value {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.snap-detail {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* Charts */
+.chart-wrap {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px;
+  margin: 24px 0;
+  position: relative;
+}
+
+.chart-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.chart-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.chart-canvas-wrap {
+  position: relative;
+  height: 320px;
+}
+
+.chart-canvas-wrap.tall { height: 380px; }
+
+/* Tables */
+.table-wrap {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead th {
+  background: var(--paper-warm);
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  border-bottom: 1px solid var(--rule);
+}
+
+thead th.right { text-align: right; }
+
+tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+tbody td.right { text-align: right; }
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr.highlight { background: rgba(139, 111, 63, 0.06); }
+
+tbody td strong { color: var(--ink); }
+
+.safe-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 3px;
+}
+.safe-very { background: #e8f0e3; color: #3d6b3d; }
+.safe-over { background: #dbe7c9; color: #2d5a2d; }
+.safe-excess { background: #c9dcb5; color: #1e4a1e; }
+
+/* Two-column */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+/* Scenario cards */
+.scenario-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.scenario-card.featured {
+  border-left: 4px solid var(--accent);
+}
+
+.scenario-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.scenario-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.scenario-year {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.scenario-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.sc-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.sc-stat-value {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* Action list */
+.action-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.action-item:last-child { border-bottom: none; }
+
+.action-num {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 44px;
+}
+
+.action-body h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 19px;
+  margin-bottom: 6px;
+}
+
+.action-body p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+/* Uncertainty tag */
+.uncertain {
+  display: inline-block;
+  background: #f3ede0;
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Footer */
+.footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.footer p { max-width: none; margin-bottom: 10px; }
+
+@media print {
+  body { background: white; }
+  .chart-wrap, .table-wrap, .scenario-card { page-break-inside: avoid; }
+  section { page-break-inside: avoid; }
+}
+
+@media (max-width: 720px) {
+  .container { padding: 32px 20px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 26px; }
+  .snapshot { grid-template-columns: repeat(2, 1fr); }
+  .snap-cell:nth-child(2) { border-right: none; }
+  .snap-cell:nth-child(1), .snap-cell:nth-child(2) { border-bottom: 1px solid var(--rule); }
+  .two-col { grid-template-columns: 1fr; }
+  .scenario-stats { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Prepared for Dave and Stephie</div>
+  <h1>Our Retirement Plan</h1>
+  <p class="hero-sub">A clear look at where we stand, what we can afford, and when we can stop working — in plain language, with real numbers.</p>
+  <div class="hero-meta">
+    <div><strong>Dave's age</strong>54</div>
+    <div><strong>Stephie's age</strong>57</div>
+    <div><strong>Target spending</strong>$120K/yr (today's $)</div>
+    <div><strong>Includes healthcare</strong>Yes</div>
+  </div>
+</div>
+
+<!-- SNAPSHOT -->
+<section>
+  <div class="eyebrow">Where we stand today</div>
+  <h2>The short version</h2>
+  <p class="section-lede">We're in strong shape. The question isn't whether we can retire — it's when we want to and how we want it structured.</p>
+
+  <div class="snapshot">
+    <div class="snap-cell">
+      <div class="snap-label">Total saved</div>
+      <div class="snap-value">$2.58M</div>
+      <div class="snap-detail">Across all accounts</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">Years to retirement</div>
+      <div class="snap-value">6-11</div>
+      <div class="snap-detail">Depending on scenario</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">Annual spending need</div>
+      <div class="snap-value">$120K</div>
+      <div class="snap-detail">Including healthcare</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">Earliest viable retirement</div>
+      <div class="snap-value">Age 60</div>
+      <div class="snap-detail">With some planning</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">Bottom line</div>
+    <p>At every retirement age we looked at (60, 62, 65, 67), the plan works. We can support a $120K lifestyle comfortably, and we'll likely end up with more money than we started with. The real decisions are about <strong>taxes, healthcare, and Social Security timing</strong>, not "can we afford it."</p>
+  </div>
+</section>
+
+<!-- WHERE MONEY IS -->
+<section>
+  <div class="eyebrow">Today's finances</div>
+  <h2>What we have and where it lives</h2>
+  <p class="section-lede">Our money is split across three buckets. Each has different tax rules, which affects how and when we can spend it.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Current asset allocation</div>
+    <div class="chart-sub">Brokerage is by far the largest bucket — this is a strength (it's flexible) but also a tax planning opportunity.</div>
+    <div class="chart-canvas-wrap">
+      <canvas id="assetPie"></canvas>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>Brokerage: $2,125,000</h3>
+      <p>Our largest bucket. Fully flexible, but every dollar of gain we realize is taxable. This is what bridges us to Social Security and Medicare.</p>
+    </div>
+    <div>
+      <h3>IRAs: $250,000</h3>
+      <p>Tax-deferred. We pay ordinary income tax when we withdraw. We're continuing to max contributions.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>New Solo 401(k): $200K this year</h3>
+      <p>Dave is setting this up through the S-corp. With an $80K W-2 the annual max is about $62K, so the $200K target needs a higher W-2 or a different landing spot. See action items.</p>
+    </div>
+    <div>
+      <h3>What we don't have yet</h3>
+      <p>Roth accounts. Zero so far. This is a gap worth filling, since Roth gives us tax-free money in retirement and flexibility to manage tax brackets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH CHART -->
+<section>
+  <div class="eyebrow">The path forward</div>
+  <h2>How our savings grow</h2>
+  <p class="section-lede">If we keep contributing and earn a reasonable return, here's what our total portfolio looks like over time — in today's dollars, so inflation is already stripped out.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Portfolio growth to retirement (today's dollars)</div>
+    <div class="chart-sub">Assumes ~6% real return and continued maxing of retirement accounts. Vertical lines mark potential retirement ages.</div>
+    <div class="chart-canvas-wrap tall">
+      <canvas id="growthLine"></canvas>
+    </div>
+  </div>
+
+  <p>The flat shape after retirement isn't accidental — it's a good sign. It means our withdrawals roughly match growth, so the portfolio holds its value through our 80s and 90s instead of running out.</p>
+</section>
+
+<!-- SCENARIOS -->
+<section>
+  <div class="eyebrow">When can we stop working</div>
+  <h2>Four retirement ages, side by side</h2>
+  <p class="section-lede">Each scenario shows what the portfolio looks like, what Social Security adds, and how much we'd need to pull from savings each year. "Withdrawal rate" is the key safety number — anything under 4% is generally safe, and we're well below that in every case.</p>
+
+  <div class="scenario-card">
+    <div class="scenario-head">
+      <div class="scenario-title">Retire at 60 <span class="safe-badge safe-very">Viable</span></div>
+      <div class="scenario-year">Mid-2031 · 5 years from now</div>
+    </div>
+    <p>The earliest age where the math clearly works. Dave would bridge from brokerage and a smaller 401(k) balance until Social Security kicks in at 62.</p>
+    <div class="scenario-stats">
+      <div><div class="sc-stat-label">Portfolio</div><div class="sc-stat-value">$4.1M</div></div>
+      <div><div class="sc-stat-label">Annual need</div><div class="sc-stat-value">$120K</div></div>
+      <div><div class="sc-stat-label">SS income (yr 1)</div><div class="sc-stat-value">$0</div></div>
+      <div><div class="sc-stat-label">Withdrawal rate</div><div class="sc-stat-value">2.9%</div></div>
+    </div>
+  </div>
+
+  <div class="scenario-card featured">
+    <div class="scenario-head">
+      <div class="scenario-title">Retire at 62 <span class="safe-badge safe-over">Strong</span></div>
+      <div class="scenario-year">Mid-2033 · 7 years from now</div>
+    </div>
+    <p>Aligns nicely with Stephie turning 65 and qualifying for Medicare a year later. Dave's Social Security becomes available. This is the "balanced" choice.</p>
+    <div class="scenario-stats">
+      <div><div class="sc-stat-label">Portfolio</div><div class="sc-stat-value">$4.5M</div></div>
+      <div><div class="sc-stat-label">Annual need</div><div class="sc-stat-value">$120K</div></div>
+      <div><div class="sc-stat-label">SS income (yr 1)</div><div class="sc-stat-value">~$24K</div></div>
+      <div><div class="sc-stat-label">Withdrawal rate</div><div class="sc-stat-value">2.1%</div></div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-head">
+      <div class="scenario-title">Retire at 65 <span class="safe-badge safe-excess">Over-funded</span></div>
+      <div class="scenario-year">Mid-2036 · 10 years from now</div>
+    </div>
+    <p>Medicare for Dave starts immediately. 401(k) is fully funded. At this point we have room to spend materially more than $120K if we want.</p>
+    <div class="scenario-stats">
+      <div><div class="sc-stat-label">Portfolio</div><div class="sc-stat-value">$5.3M</div></div>
+      <div><div class="sc-stat-label">Annual need</div><div class="sc-stat-value">$120K</div></div>
+      <div><div class="sc-stat-label">SS income (yr 1)</div><div class="sc-stat-value">~$54K</div></div>
+      <div><div class="sc-stat-label">Withdrawal rate</div><div class="sc-stat-value">1.2%</div></div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-head">
+      <div class="scenario-title">Retire at 67 <span class="safe-badge safe-excess">Over-funded</span></div>
+      <div class="scenario-year">Mid-2038 · 12 years from now</div>
+    </div>
+    <p>Dave's full Social Security benefit. At this portfolio level we'd likely die with more money than we retired with, so this age only makes sense if Dave genuinely wants to keep working.</p>
+    <div class="scenario-stats">
+      <div><div class="sc-stat-label">Portfolio</div><div class="sc-stat-value">$6.1M</div></div>
+      <div><div class="sc-stat-label">Annual need</div><div class="sc-stat-value">$120K</div></div>
+      <div><div class="sc-stat-label">SS income (yr 1)</div><div class="sc-stat-value">~$59K</div></div>
+      <div><div class="sc-stat-label">Withdrawal rate</div><div class="sc-stat-value">1.0%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO COMPARISON -->
+<section>
+  <div class="eyebrow">Visualizing the tradeoff</div>
+  <h2>What later retirement buys us</h2>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Portfolio size at retirement, by age</div>
+    <div class="chart-sub">Each extra year adds roughly $300-400K. After a point, the money stops being the question.</div>
+    <div class="chart-canvas-wrap">
+      <canvas id="portfolioBar"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Where retirement income comes from</div>
+    <div class="chart-sub">Earlier retirement means more weight on the portfolio; later means Social Security carries more of the load.</div>
+    <div class="chart-canvas-wrap">
+      <canvas id="incomeStack"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL SECURITY -->
+<section>
+  <div class="eyebrow">Social Security</div>
+  <h2>When to claim matters</h2>
+  <p class="section-lede">You get a different monthly check depending on when you file. The longer you wait (up to age 70), the bigger the check — and it's inflation-adjusted for life. This is a separate decision from when we stop working.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Dave's Social Security benefit by claim age</div>
+    <div class="chart-sub">Waiting from 62 to 70 nearly doubles the monthly benefit. Stephie's spousal benefit is based on Dave's number.</div>
+    <div class="chart-canvas-wrap">
+      <canvas id="ssBar"></canvas>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>Dave's options</h3>
+      <ul>
+        <li>Age 62: $2,192/mo</li>
+        <li>Age 67 (full): $3,269/mo</li>
+        <li>Age 70 (max): $4,085/mo</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Stephie's spousal benefit</h3>
+      <ul>
+        <li>Up to 50% of Dave's full benefit: ~$1,635/mo</li>
+        <li>She can't claim until Dave files</li>
+        <li>She's 2.5 years older, so her timing affects what's optimal</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">A strategy worth considering</div>
+    <p>Retire earlier, claim Social Security later. We have enough in the brokerage to "bridge" the gap. Delaying Dave's Social Security to 70 gives us a bigger inflation-protected paycheck for life and leaves more for Stephie if Dave dies first.</p>
+  </div>
+</section>
+
+<!-- INCOME IN RETIREMENT -->
+<section>
+  <div class="eyebrow">What a year looks like</div>
+  <h2>How we'd actually live on this</h2>
+  <p class="section-lede">Retirement income is built from layers. Here's a typical year once we're fully retired, assuming we retire at 62 and both Social Security checks are flowing.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Annual retirement income mix (retire at 62, both on SS)</div>
+    <div class="chart-sub">Social Security handles about a third; the portfolio covers the rest.</div>
+    <div class="chart-canvas-wrap">
+      <canvas id="incomePie"></canvas>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th class="right">Annual amount</th>
+          <th class="right">Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dave's Social Security</td>
+          <td class="right">$24,000</td>
+          <td class="right">20%</td>
+        </tr>
+        <tr>
+          <td>Stephie's spousal benefit</td>
+          <td class="right">$14,000</td>
+          <td class="right">12%</td>
+        </tr>
+        <tr>
+          <td>Portfolio withdrawals</td>
+          <td class="right">$82,000</td>
+          <td class="right">68%</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>Total</strong></td>
+          <td class="right"><strong>$120,000</strong></td>
+          <td class="right"><strong>100%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- HEALTHCARE -->
+<section>
+  <div class="eyebrow">The healthcare bridge</div>
+  <h2>Getting from retirement to Medicare</h2>
+  <p class="section-lede">Medicare starts at 65. If we retire earlier, we need private coverage to fill the gap. Good news: there's a legitimate strategy that can cut this cost significantly.</p>
+
+  <p>We currently pay <strong>$17,892/yr</strong> for three people. Once TJ ages off, expect $15-25K/yr for just the two of us on an ACA plan.</p>
+
+  <div class="callout">
+    <div class="callout-title">The ACA subsidy angle <span class="uncertain">Planning opportunity</span></div>
+    <p>ACA premium tax credits are based on <em>taxable</em> income, not net worth. If we retire early and live mostly off brokerage sales (where only the gain portion is taxable), we could show low taxable income and qualify for significant subsidies — potentially cutting healthcare costs to <strong>$5-10K/yr</strong>. This needs real planning but can be worth tens of thousands over the 62-to-65 window.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>Coverage</th>
+          <th class="right">Likely cost (both of us)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Now until Dave retires</td>
+          <td>Private (current)</td>
+          <td class="right">~$15-18K/yr</td>
+        </tr>
+        <tr>
+          <td>Dave retires before 65</td>
+          <td>ACA marketplace</td>
+          <td class="right">$5-25K/yr depending on income strategy</td>
+        </tr>
+        <tr>
+          <td>Stephie hits 65 (Jan 2034)</td>
+          <td>Stephie on Medicare, Dave on ACA</td>
+          <td class="right">~$3-12K/yr</td>
+        </tr>
+        <tr>
+          <td>Dave hits 65 (June 2036)</td>
+          <td>Both on Medicare + supplements</td>
+          <td class="right">~$8-12K/yr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ACTION ITEMS -->
+<section>
+  <div class="eyebrow">What we should do now</div>
+  <h2>Action items, in order</h2>
+  <p class="section-lede">These are the practical moves that materially improve the plan. Most are decisions, not huge lifts.</p>
+
+  <div class="action-item">
+    <div class="action-num">01</div>
+    <div class="action-body">
+      <h4>Talk to the CPA about Dave's W-2 salary</h4>
+      <p>At $80K, the Solo 401(k) max is about $62K/yr — not enough to hit our contribution targets. Raising the W-2 to $140-150K roughly doubles the tax-advantaged savings capacity. Tradeoff is more payroll tax, but the retirement math wins. Needs to meet "reasonable compensation" rules for an S-corp.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">02</div>
+    <div class="action-body">
+      <h4>Set up a Solo 401(k), not a SEP</h4>
+      <p>A Solo 401(k) allows Roth employee contributions; a SEP does not. Given our complete lack of Roth money today, the Roth option is worth a lot. Fidelity and Schwab both offer these for free.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">03</div>
+    <div class="action-body">
+      <h4>Put Stephie on the S-corp payroll</h4>
+      <p>If she does any real work for the business, even part-time, paying her a W-2 opens her own Solo 401(k) ($31K Roth potential), builds her own Social Security record, and adds another 25% employer match. Could be worth $40-50K/yr in additional retirement savings.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">04</div>
+    <div class="action-body">
+      <h4>Get cost basis and allocation numbers on the brokerage</h4>
+      <p>This is the biggest unknown. We need to know (a) how much of the $2.125M is gains vs. original investment, and (b) how it's split between stocks, bonds, and cash. Log into the brokerage and look for "unrealized gains" and the allocation summary. Takes 10 minutes and it materially shapes the tax strategy.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">05</div>
+    <div class="action-body">
+      <h4>Start a Roth conversion plan for post-retirement years</h4>
+      <p>Between retiring and age 75 (when required withdrawals start), we'll likely have several years of low taxable income. That's prime time to convert traditional IRA dollars to Roth at low tax rates. This isn't urgent but belongs on the radar.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">06</div>
+    <div class="action-body">
+      <h4>Decide on the mortgage</h4>
+      <p>$200K left in Leesburg. If the rate is under 5%, keep it — the portfolio earns more. If higher, consider paying it off at retirement. Either way it's a rounding error on the overall plan.</p>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">07</div>
+    <div class="action-body">
+      <h4>Revisit long-term care</h4>
+      <p>We're at the right age to consider LTC insurance or a hybrid life/LTC policy. Self-insuring is also legitimate at our asset level. Worth one conversation with an independent broker, not urgent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE THIS COULD BE WRONG -->
+<section>
+  <div class="eyebrow">Honest uncertainty</div>
+  <h2>Where these numbers could be off</h2>
+  <p class="section-lede">This plan uses reasonable middle-of-the-road assumptions. Here's what I'm less sure about, so we go in with eyes open.</p>
+
+  <ul>
+    <li><strong>Investment returns.</strong> I assumed 6% real return pre-retirement, 5% in retirement. Historically reasonable, but a bad decade is possible. Our low withdrawal rate gives us a big cushion.</li>
+    <li><strong>Social Security estimates.</strong> The SSA figures assume Dave keeps earning at current levels until retirement. If Dave retires at 62 and stops contributing earlier, the actual benefit could be 5-10% lower.</li>
+    <li><strong>Stephie's benefit.</strong> Modeled as spousal only. If she goes on payroll or has earnings history I don't know about, her own benefit could beat the spousal amount.</li>
+    <li><strong>Healthcare costs.</strong> Highly variable. ACA rules could change. The $5-25K/yr range is based on today's market.</li>
+    <li><strong>Tax law.</strong> Income tax brackets and capital gains rates will change over 15-20 years. We plan with today's rules and adjust.</li>
+    <li><strong>Inflation.</strong> I used 2.5% and showed numbers in today's dollars. Higher inflation hurts bonds and cash, but our portfolio is equity-heavy enough to mostly keep up.</li>
+    <li><strong>The "no clue" items.</strong> Cost basis, exact asset allocation, and concentration risk in the brokerage are real unknowns that could shift the tax strategy meaningfully once we have them.</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Prepared April 2026.</strong> Numbers use today's dollars and 2026 tax rules. Social Security estimates are from Dave's SSA statement. This is a planning framework, not a financial advisor's formal recommendation. Before making major moves (raising W-2, opening accounts, converting IRA dollars to Roth), confirm with our CPA and, if we want one, a fee-only fiduciary advisor.</p>
+  <p>All projections are modeled estimates based on stated assumptions. Actual investment returns, tax rules, and life circumstances will vary.</p>
+</div>
+
+</div>
+
+<script>
+const ink = '#1a1d24';
+const inkSoft = '#3a3f4a';
+const rule = '#d9d3c4';
+const paper = '#faf8f3';
+const accent = '#8b6f3f';
+const accentDeep = '#5c4624';
+const navy = '#1e3a5f';
+const sage = '#6b7f5f';
+const terracotta = '#a8623d';
+
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = inkSoft;
+Chart.defaults.borderColor = rule;
+
+// 1. Asset pie
+new Chart(document.getElementById('assetPie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Brokerage', 'IRAs', 'Solo 401(k) (planned)'],
+    datasets: [{
+      data: [2125, 250, 200],
+      backgroundColor: [navy, accent, sage],
+      borderColor: paper,
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '55%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: { padding: 16, boxWidth: 14, font: { size: 13 } }
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${ctx.label}: $${ctx.parsed}K`
+        }
+      }
+    }
+  }
+});
+
+// 2. Growth line
+// Portfolio projection to 85 across retire-at-62 scenario, today's dollars (K)
+const growthLabels = [];
+const growthValues = [];
+const startAge = 54;
+let portfolio = 2575; // thousands, starting total 2026
+for (let age = startAge; age <= 85; age++) {
+  growthLabels.push(age);
+  growthValues.push(Math.round(portfolio));
+  if (age < 62) {
+    // working years: grow 6% real, add ~70K contributions
+    portfolio = portfolio * 1.06 + 70;
+  } else {
+    // retired: grow 5% real, withdraw ~85K (declining as SS kicks in but keep simple)
+    portfolio = portfolio * 1.05 - 85;
+  }
+}
+
+new Chart(document.getElementById('growthLine'), {
+  type: 'line',
+  data: {
+    labels: growthLabels,
+    datasets: [{
+      label: 'Portfolio value ($K, today\'s dollars)',
+      data: growthValues,
+      borderColor: navy,
+      backgroundColor: 'rgba(30, 58, 95, 0.08)',
+      borderWidth: 2.5,
+      fill: true,
+      tension: 0.3,
+      pointRadius: 0,
+      pointHoverRadius: 5
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: (items) => `Age ${items[0].label}`,
+          label: (ctx) => `$${(ctx.parsed.y/1000).toFixed(2)}M`
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'Age', color: inkSoft, font: { size: 12 } },
+        grid: { display: false }
+      },
+      y: {
+        title: { display: true, text: 'Portfolio ($K)', color: inkSoft, font: { size: 12 } },
+        ticks: {
+          callback: (val) => '$' + (val/1000).toFixed(1) + 'M'
+        },
+        grid: { color: 'rgba(217, 211, 196, 0.5)' }
+      }
+    }
+  },
+  plugins: [{
+    id: 'retAgeLines',
+    afterDraw: (chart) => {
+      const ctx = chart.ctx;
+      const yAxis = chart.scales.y;
+      const xAxis = chart.scales.x;
+      const marks = [
+        { age: 60, label: 'Retire 60', color: sage },
+        { age: 62, label: 'Retire 62', color: accent },
+        { age: 65, label: 'Retire 65', color: terracotta },
+        { age: 67, label: 'Retire 67', color: navy }
+      ];
+      marks.forEach(m => {
+        const x = xAxis.getPixelForValue(m.age);
+        ctx.save();
+        ctx.strokeStyle = m.color;
+        ctx.globalAlpha = 0.35;
+        ctx.setLineDash([4, 4]);
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x, yAxis.top);
+        ctx.lineTo(x, yAxis.bottom);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        ctx.setLineDash([]);
+        ctx.fillStyle = m.color;
+        ctx.font = '10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(m.label, x, yAxis.top - 4);
+        ctx.restore();
+      });
+    }
+  }]
+});
+
+// 3. Portfolio bar
+new Chart(document.getElementById('portfolioBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Retire at 60', 'Retire at 62', 'Retire at 65', 'Retire at 67'],
+    datasets: [{
+      label: 'Portfolio at retirement',
+      data: [4100, 4500, 5300, 6100],
+      backgroundColor: [sage, accent, terracotta, navy],
+      borderRadius: 3,
+      barThickness: 56
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: (ctx) => `$${(ctx.parsed.y/1000).toFixed(2)}M` }
+      }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: {
+        ticks: { callback: (v) => '$' + (v/1000).toFixed(1) + 'M' },
+        grid: { color: 'rgba(217, 211, 196, 0.5)' }
+      }
+    }
+  }
+});
+
+// 4. Income stack (how much from SS vs portfolio by retire age)
+new Chart(document.getElementById('incomeStack'), {
+  type: 'bar',
+  data: {
+    labels: ['Retire at 60', 'Retire at 62', 'Retire at 65', 'Retire at 67'],
+    datasets: [
+      {
+        label: 'From Social Security',
+        data: [0, 38, 54, 59],
+        backgroundColor: accent,
+        borderRadius: 2,
+        stack: 'income'
+      },
+      {
+        label: 'From Portfolio',
+        data: [120, 82, 66, 61],
+        backgroundColor: navy,
+        borderRadius: 2,
+        stack: 'income'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, boxWidth: 14 } },
+      tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: $${ctx.parsed.y}K` } }
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: {
+        stacked: true,
+        ticks: { callback: (v) => '$' + v + 'K' },
+        grid: { color: 'rgba(217, 211, 196, 0.5)' },
+        title: { display: true, text: 'Annual income ($K)', color: inkSoft, font: { size: 12 } }
+      }
+    }
+  }
+});
+
+// 5. SS claim age bar
+new Chart(document.getElementById('ssBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Claim at 62', 'Claim at 67 (full)', 'Claim at 70 (max)'],
+    datasets: [{
+      label: 'Dave\'s monthly benefit',
+      data: [2192, 3269, 4085],
+      backgroundColor: [terracotta, accent, sage],
+      borderRadius: 3,
+      barThickness: 64
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: (ctx) => `$${ctx.parsed.x.toLocaleString()}/month` }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { callback: (v) => '$' + v.toLocaleString() },
+        grid: { color: 'rgba(217, 211, 196, 0.5)' },
+        title: { display: true, text: 'Monthly benefit ($)', color: inkSoft, font: { size: 12 } }
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// 6. Income pie (retire at 62, both SS flowing)
+new Chart(document.getElementById('incomePie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Portfolio withdrawals', 'Dave\'s Social Security', 'Stephie\'s spousal benefit'],
+    datasets: [{
+      data: [82, 24, 14],
+      backgroundColor: [navy, accent, sage],
+      borderColor: paper,
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '55%',
+    plugins: {
+      legend: { position: 'right', labels: { padding: 16, boxWidth: 14, font: { size: 13 } } },
+      tooltip: { callbacks: { label: (ctx) => `${ctx.label}: $${ctx.parsed}K` } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
